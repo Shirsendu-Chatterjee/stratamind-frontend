@@ -1,4 +1,4 @@
-const backendURL = "https://rag-backend.onrender.com"; // change this after deploying
+const backendURL = "https://stratamind-backend.onrender.com"; // change this after deploying
 
 async function uploadFile() {
   const fileInput = document.getElementById("fileInput");
@@ -57,3 +57,4 @@ async function askQuestion() {
     console.error(err);
   }
 }
+
