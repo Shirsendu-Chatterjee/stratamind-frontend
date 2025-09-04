@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAG Demo with Groq</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>📚 RAG Demo (Groq + LangChain + ChromaDB)</h1>
+
+    <!-- Upload section -->
+    <div class="upload-section">
+      <h3>Upload a document (PDF or TXT)</h3>
+      <input type="file" id="fileInput" />
+      <button onclick="uploadFile()">Upload</button>
+      <p id="uploadStatus"></p>
+    </div>
+
+    <!-- QnA section -->
+    <div class="qna-section">
+      <h3>Ask a question</h3>
+      <input type="text" id="questionInput" placeholder="Type your question..." />
+      <button onclick="askQuestion()">Ask</button>
+      <p id="answer"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

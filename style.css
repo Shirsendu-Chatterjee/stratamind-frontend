@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+h3 {
+  margin-top: 30px;
+  color: #444;
+}
+
+.upload-section, .qna-section {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: #4cafef;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #3a9cd6;
+}
+
+#answer {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #222;
+}
