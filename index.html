@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RAG Demo with Groq</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>RAG Chatbot Demo</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    #chat-box { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; }
+    #user-input { width: 70%; padding: 8px; }
+    #send-btn { padding: 8px 12px; }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>📚 RAG Demo (Groq + LangChain + ChromaDB)</h1>
+  <h1>RAG Chatbot Demo</h1>
 
-    <!-- Upload section -->
-    <div class="upload-section">
-      <h3>Upload a document (PDF or TXT)</h3>
-      <input type="file" id="fileInput" />
-      <button onclick="uploadFile()">Upload</button>
-      <p id="uploadStatus"></p>
-    </div>
+  <textarea id="knowledge" rows="4" cols="50" placeholder="Paste your text here..."></textarea><br>
+  <button onclick="uploadText()">Upload Knowledge</button>
 
-    <!-- QnA section -->
-    <div class="qna-section">
-      <h3>Ask a question</h3>
-      <input type="text" id="questionInput" placeholder="Type your question..." />
-      <button onclick="askQuestion()">Ask</button>
-      <p id="answer"></p>
-    </div>
-  </div>
+  <div id="chat-box"></div>
+
+  <input type="text" id="user-input" placeholder="Type your question..." />
+  <button id="send-btn" onclick="sendMessage()">Send</button>
 
   <script src="script.js"></script>
 </body>
 </html>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
+
