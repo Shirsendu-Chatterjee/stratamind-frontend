@@ -1,184 +1,36 @@
-const chatBox = document.getElementById("chat-box");
-const userInput = document.getElementById("user-input");
-const sendBtn = document.getElementById("send-btn");
+const backendUrl = "https://huggingface.co/spaces/S-Chatterjee2005/stratamind";
+const sessionId = Date.now().toString();
 
-// Each user gets their own temporary "namespace"
-let sessionId = Date.now().toString();
+async function uploadText() {
+  const text = document.getElementById("knowledge").value;
+  if (!text.trim()) return;
 
-// Add a message to the chat box
-function addMessage(sender, text) {
-    const msg = document.createElement("div");
-    msg.classList.add(sender);
-    msg.textContent = `${sender}: ${text}`;
-    chatBox.appendChild(msg);
-    chatBox.scrollTop = chatBox.scrollHeight;
+  await fetch(`${backendUrl}/ingest/${sessionId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text })
+  });
+
+  document.getElementById("chat-box").innerHTML += `<div><em>Knowledge uploaded ✅</em></div>`;
+  document.getElementById("knowledge").value = "";
 }
 
-// Send query to backend
 async function sendMessage() {
-    const text = userInput.value.trim();
-    if (!text) return;
+  const input = document.getElementById("user-input");
+  const query = input.value.trim();
+  if (!query) return;
 
-    addMessage("You", text);
-    userInput.value = "";
+  const chatBox = document.getElementById("chat-box");
+  chatBox.innerHTML += `<div><b>You:</b> ${query}</div>`;
+  input.value = "";
 
-    try {
-        const response = await fetch("https://stratamind-backend.onrender.com", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ query: text, session_id: sessionId })
-        });
+  const res = await fetch(`${backendUrl}/query`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query, session_id: sessionId })
+  });
 
-        const data = await response.json();
-        addMessage("AI", data.answer);
-    } catch (err) {
-        console.error(err);
-        addMessage("AI", "⚠️ Error: Could not reach backend.");
-    }
+  const data = await res.json();
+  chatBox.innerHTML += `<div><b>AI:</b> ${data.answer}</div>`;
+  chatBox.scrollTop = chatBox.scrollHeight;
 }
-
-// Event listeners
-sendBtn.addEventListener("click", sendMessage);
-userInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        sendMessage();
-    }
-});
-const chatBox = document.getElementById("chat-box");
-const userInput = document.getElementById("user-input");
-const sendBtn = document.getElementById("send-btn");
-
-// Each user gets their own temporary "namespace"
-let sessionId = Date.now().toString();
-
-// Add a message to the chat box
-function addMessage(sender, text) {
-    const msg = document.createElement("div");
-    msg.classList.add(sender);
-    msg.textContent = `${sender}: ${text}`;
-    chatBox.appendChild(msg);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// Send query to backend
-async function sendMessage() {
-    const text = userInput.value.trim();
-    if (!text) return;
-
-    addMessage("You", text);
-    userInput.value = "";
-
-    try {
-        const response = await fetch("https://your-backend-url.onrender.com/query", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ query: text, session_id: sessionId })
-        });
-
-        const data = await response.json();
-        addMessage("AI", data.answer);
-    } catch (err) {
-        console.error(err);
-        addMessage("AI", "⚠️ Error: Could not reach backend.");
-    }
-}
-
-// Event listeners
-sendBtn.addEventListener("click", sendMessage);
-userInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        sendMessage();
-    }
-});
-const chatBox = document.getElementById("chat-box");
-const userInput = document.getElementById("user-input");
-const sendBtn = document.getElementById("send-btn");
-
-// Each user gets their own temporary "namespace"
-let sessionId = Date.now().toString();
-
-// Add a message to the chat box
-function addMessage(sender, text) {
-    const msg = document.createElement("div");
-    msg.classList.add(sender);
-    msg.textContent = `${sender}: ${text}`;
-    chatBox.appendChild(msg);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// Send query to backend
-async function sendMessage() {
-    const text = userInput.value.trim();
-    if (!text) return;
-
-    addMessage("You", text);
-    userInput.value = "";
-
-    try {
-        const response = await fetch("https://your-backend-url.onrender.com/query", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ query: text, session_id: sessionId })
-        });
-
-        const data = await response.json();
-        addMessage("AI", data.answer);
-    } catch (err) {
-        console.error(err);
-        addMessage("AI", "⚠️ Error: Could not reach backend.");
-    }
-}
-
-// Event listeners
-sendBtn.addEventListener("click", sendMessage);
-userInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        sendMessage();
-    }
-});
-const chatBox = document.getElementById("chat-box");
-const userInput = document.getElementById("user-input");
-const sendBtn = document.getElementById("send-btn");
-
-// Each user gets their own temporary "namespace"
-let sessionId = Date.now().toString();
-
-// Add a message to the chat box
-function addMessage(sender, text) {
-    const msg = document.createElement("div");
-    msg.classList.add(sender);
-    msg.textContent = `${sender}: ${text}`;
-    chatBox.appendChild(msg);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// Send query to backend
-async function sendMessage() {
-    const text = userInput.value.trim();
-    if (!text) return;
-
-    addMessage("You", text);
-    userInput.value = "";
-
-    try {
-        const response = await fetch("https://your-backend-url.onrender.com/query", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ query: text, session_id: sessionId })
-        });
-
-        const data = await response.json();
-        addMessage("AI", data.answer);
-    } catch (err) {
-        console.error(err);
-        addMessage("AI", "⚠️ Error: Could not reach backend.");
-    }
-}
-
-// Event listeners
-sendBtn.addEventListener("click", sendMessage);
-userInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        sendMessage();
-    }
-});
